@@ -1,17 +1,18 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import {computed, ref} from 'vue'
+import {defineStore} from 'pinia'
+import {useStorage} from "@vueuse/core";
+import {UserRole} from "@/enums/common";
 
 export const useUserStore = defineStore('user', () => {
-    const userRole = ref();
-    const isAuthenticated = ref(false)
+    const userRole = useStorage('role', UserRole.guest);
 
-    isAuthenticated.value = !!localStorage.getItem('role');
+    const isAuthenticated = computed(() => {
+        return userRole.value !== UserRole.guest;
+    }) 
 
     function setUserRole(role: string) {
-        localStorage.setItem('role', role);
         userRole.value = role;
-        isAuthenticated.value = true;
     }
 
-    return { isAuthenticated, setUserRole }
+    return {isAuthenticated, setUserRole}
 })
