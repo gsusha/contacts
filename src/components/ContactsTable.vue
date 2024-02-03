@@ -1,5 +1,5 @@
 <template>
-  <table class="contacts-table" rows="">
+  <table :class="[{ loading: isLoading }, 'contacts-table']">
     <thead>
       <tr>
         <th v-for="column in contactsTableColumns" :key="column.name">
@@ -9,7 +9,10 @@
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody v-if="isLoading">
+      <LoadingIcon />
+    </tbody>
+    <tbody v-else>
     <tr v-for="contact in rows" :key="contact.id.value">
       <td class="avatar">
         <img :src="contact.picture.medium" alt="avatar">
@@ -28,9 +31,11 @@
 <script lang="ts" setup>
 import type { Contact } from "@/types/contact";
 import { contactsTableColumns } from "@/utils/common";
+import LoadingIcon from '@/assets/images/Loader.svg';
 
 type TableProps = {
   rows: Contact[];
+  isLoading: boolean;
 };
 
 defineProps<TableProps>();
@@ -38,38 +43,58 @@ defineProps<TableProps>();
 
 <style lang="scss" scoped>
 table {
-  border: 2px solid #42b983;
+  display: block;
   border-radius: 3px;
-  background-color: #fff;
+  border: 1px solid #666666;
+
+  &.loading {
+    tbody {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+
+      svg {
+        width: 100px;
+      }
+    }
+  }
 }
 
 th {
-  background-color: #42b983;
-  color: rgba(255, 255, 255, 0.66);
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  background: #232323;
+  font-weight: 500;
 }
 
-td {
-  background-color: #f9f9f9;
-  color: #181818;
+tbody {
+  tr {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: block;
+      height: 1px;
+      width: 100%;
+      opacity: 0.3;
+      background: #666666;
+    }
+
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+  }
 }
+
 
 th,
 td {
   min-width: 120px;
   padding: 10px 20px;
-}
-
-th.active {
-  color: #fff;
-}
-
-th.active .arrow {
-  opacity: 1;
 }
 
 .arrow {
@@ -93,4 +118,9 @@ th.active .arrow {
   border-top: 4px solid #fff;
 }
 
+.avatar {
+  img {
+    border-radius: 50%;
+  }
+}
 </style>

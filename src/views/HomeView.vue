@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1>Контакты:</h1>
-    <ContactsTable :rows="contacts" />
+    <ContactsTable :rows="contacts" :is-loading="isLoading" />
   </main>
 </template>
 
@@ -11,13 +11,17 @@ import { useContactsStore } from "@/stores/contacts";
 import { storeToRefs } from 'pinia'
 
 const contactsStore = useContactsStore();
-const { contacts } = storeToRefs(contactsStore);
+const { contacts, isLoading } = storeToRefs(contactsStore);
 
 contactsStore.getContacts();
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  margin-bottom: 30px;
+main {
+  padding: 100px 0;
+
+  h1 {
+    margin-bottom: 30px;
+  }
 }
 </style>

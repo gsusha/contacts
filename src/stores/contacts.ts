@@ -5,6 +5,7 @@ import type { Contact } from "@/types/contact";
 
 export const useContactsStore = defineStore('contacts', () => {
     const contacts = ref<Contact[]>();
+    const isLoading = ref(true);
 
     function setContacts(items: Contact[]) {
         contacts.value = items;
@@ -12,13 +13,14 @@ export const useContactsStore = defineStore('contacts', () => {
 
     async function getContacts() {
         try {
-            const { data } = await useFetch<Contact[]>(import.meta.env.VITE_API_BASE_URL).get().json();
+            const { data, isFetching } = await useFetch<Contact[]>(import.meta.env.VITE_API_BASE_URL).get().json();
             setContacts(data.value.results);
+            isLoading.value = false;
         }
         catch (e) {
             console.log(e);
         }
     }
 
-    return { contacts, getContacts }
+    return { contacts, getContacts, isLoading }
 })
