@@ -1,10 +1,15 @@
 <template>
-  <a class="base-button">
+  <a :href="url" class="base-button">
     <slot />
   </a>
 </template>
 
 <script lang="ts" setup>
+type ButtonProps = {
+  url?: string;
+};
+
+defineProps<ButtonProps>()
 </script>
 
 <style lang="scss" scoped>

@@ -1,13 +1,24 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import type {Contact} from "@/types/contact";
+import { useFetch } from '@vueuse/core'
+import type { Contact } from "@/types/contact";
 
 export const useContactsStore = defineStore('contacts', () => {
-    const contacts = ref<Contact[]>()
+    const contacts = ref<Contact[]>();
 
     function setContacts(items: Contact[]) {
         contacts.value = items;
     }
 
-    return { contacts, setContacts }
+    async function getContacts() {
+        try {
+            const { data, error  } = await useFetch<Contact[]>(import.meta.env.VITE_API_BASE_URL).get().json();
+            setContacts(data.value.results);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    return { contacts, getContacts }
 })
