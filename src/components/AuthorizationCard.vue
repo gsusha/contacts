@@ -1,5 +1,5 @@
 <template>
-  <Card class="authorization-card">
+  <BaseCard class="authorization-card">
     <div class="title">Выберите роль:</div>
     <div class="radio-group">
       <div class="radio">
@@ -11,15 +11,15 @@
         <label for="admin">Администратор</label>
       </div>
     </div>
-    <Button @click.prevent="login">Войти</Button>
-  </Card>
+    <BaseButton @click.prevent="login">Войти</BaseButton>
+  </BaseCard>
 </template>
 
 <script lang="ts" setup>
 import { useUserStore } from "@/stores/user";
 import router from "@/router";
-import Card from "@/components/base/Card.vue";
-import Button from "@/components/base/Button.vue";
+import BaseCard from "@/components/base/BaseCard.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
 import { ref } from "vue";
 import { UserRole } from "@/enums/common";
 

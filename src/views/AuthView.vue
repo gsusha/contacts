@@ -1,11 +1,11 @@
 <template>
   <div class="auth">
-    <Authorization />
+    <AuthorizationCard />
   </div>
 </template>
 
 <script setup lang="ts">
-import Authorization from "@/components/Authorization.vue";
+import AuthorizationCard from "@/components/AuthorizationCard.vue";
 </script>
 
 <style lang="scss">

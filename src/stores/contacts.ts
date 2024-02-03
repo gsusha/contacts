@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useFetch } from '@vueuse/core'
 import type { Contact } from "@/types/contact";
@@ -12,7 +12,7 @@ export const useContactsStore = defineStore('contacts', () => {
 
     async function getContacts() {
         try {
-            const { data, error  } = await useFetch<Contact[]>(import.meta.env.VITE_API_BASE_URL).get().json();
+            const { data } = await useFetch<Contact[]>(import.meta.env.VITE_API_BASE_URL).get().json();
             setContacts(data.value.results);
         }
         catch (e) {

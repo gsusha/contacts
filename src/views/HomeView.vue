@@ -1,21 +1,23 @@
 <template>
   <main>
-    {{ contacts }}
-    <Table />
-
+    <h1>Контакты:</h1>
+    <ContactsTable :rows="contacts" />
   </main>
 </template>
 
 <script setup lang="ts">
-import Table from "@/components/Table.vue";
+import ContactsTable from "@/components/ContactsTable.vue";
 import { useContactsStore } from "@/stores/contacts";
-import { onMounted } from "vue";
-import {storeToRefs} from "pinia";
+import { storeToRefs } from 'pinia'
 
 const contactsStore = useContactsStore();
 const { contacts } = storeToRefs(contactsStore);
 
 contactsStore.getContacts();
-
-console.log(contacts);
 </script>
+
+<style lang="scss" scoped>
+h1 {
+  margin-bottom: 30px;
+}
+</style>

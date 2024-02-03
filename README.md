@@ -1,46 +1,86 @@
-# contacts
+# Тестовое задание Контакты
 
-This template should help get you started developing with Vue 3 in Vite.
+Попалось тестовое, решила реализовать для себя
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Запуск проекта
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+# Само задание:
 
-```sh
-npm run build
-```
+### Описание приложения:
 
-### Lint with [ESLint](https://eslint.org/)
+▪ **Экран Входа.**
 
-```sh
-npm run lint
-```
+1. **Пользователь должен иметь возможность войти под ролью admin или  user**
+   1. экран авторизации представлен только radio buttons( **admin** или  **user**) с кнопкой войти
+   2. записываем выбор LocalStorage
+   3. внешний вид экрана на ваше усмотрение
+
+▪ **Экран списка контактов**.
+
+**1. Данные доступны с сервера [https://randomuser.me/api/?results=200](https://randomuser.me/api/?results=100)**
+
+Отображение данных в виде таблицы.
+Колонки ряда таблицы:
+
+- Avatar
+- Fullname
+- Birthday (формат - День недели, mm/dd/yyyy, hh:mm am, кол-во лет)
+- Email (должен быть кликабельным с возможностью скопировать)
+- Phone (должен быть кликабельным с возможностью скопировать)
+- Location (Страна, Город)
+- Национальность
+
+**2. Должна быть возможность переключения режима просмотра данных:**
+
+- табличный вид
+- плиточный вид
+
+Выбранное значение должно запоминаться в localStorage и в состоянии приложения.
+При обновление страницы илперемонтировании компонента, данные должны
+отобразиться в том виде, который выбрал пользователь. Если страница посещается
+впервые, то использовать по-умолчанию табличный вид
+
+**3. Должна быть возможность фильтровать данные (доступно только администратору):**
+
+- по полному имени;
+- по половому признаку;
+- по национальности;
+
+Фильтрация должна происходить без ручной отправки формы.
+
+Очистка фильтра возвращает коллекцию к изначальному состоянию.
+
+Фильтровать нужно всю коллекцию, а не только ту часть которая сейчас в таблице
+отображается.
+
+**4. Вывести пагинацию**
+
+- по 10 пользователей на странице
+- кол-во страниц зависит от кол-во учитывая фильтр
+
+**5. Должна быть возможность сортировать данные по полному имени в трех состояниях:**
+
+- отAдоZ
+- отZдоA
+- изначальный порядок
+
+Сортировать нужно всю коллекцию, а не только ту часть которая сейчас в таблице
+отображается
+
+**6. Под таблицей необходимо вывести статистику по данным**
+
+- размер коллекции
+- кол-во мужчин, женщин и неопределившихся
+- вывести кого больше
+- кол-во контактов по каждой национальности
+
+**7. Должна быть возможность обновить данные по клику на кнопку без перезагрузки
+страницы**

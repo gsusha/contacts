@@ -5,11 +5,12 @@ export interface Contact {
     phone: string | null;
     picture: ContactPicture;
     location: ContactLocation;
+    dob: ContactBirthdate;
     nat: string | null;
 }
 
 interface ContactId {
-    value: string | null;
+    value: string;
 }
 
 interface ContactName {
@@ -19,12 +20,17 @@ interface ContactName {
 }
 
 interface ContactPicture {
-    large: string | null;
-    medium: string | null;
-    thumbnail: string | null;
+    large: string;
+    medium: string;
+    thumbnail: string;
 }
 
 interface ContactLocation {
     country: string | null;
     city: string | null;
+}
+
+interface ContactBirthdate {
+    date: string | null;
+    age: number | null;
 }

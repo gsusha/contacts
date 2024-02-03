@@ -1,7 +1,7 @@
-import {computed, ref} from 'vue'
-import {defineStore} from 'pinia'
-import {useStorage} from "@vueuse/core";
-import {UserRole} from "@/enums/common";
+import { computed } from 'vue'
+import { defineStore } from 'pinia'
+import { useStorage } from "@vueuse/core";
+import { UserRole } from "@/enums/common";
 
 export const useUserStore = defineStore('user', () => {
     const userRole = useStorage('role', UserRole.guest);
@@ -14,5 +14,5 @@ export const useUserStore = defineStore('user', () => {
         userRole.value = role;
     }
 
-    return {isAuthenticated, setUserRole}
+    return { isAuthenticated, setUserRole }
 })

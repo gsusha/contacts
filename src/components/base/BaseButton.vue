@@ -9,7 +9,7 @@ type ButtonProps = {
   url?: string;
 };
 
-defineProps<ButtonProps>()
+defineProps<ButtonProps>();
 </script>
 
 <style lang="scss" scoped>
