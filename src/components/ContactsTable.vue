@@ -5,12 +5,13 @@
         <th v-for="column in contactsTableColumns" :key="column.name">
           {{ column.name }}
           <span v-if="column.sortable" class="arrow" />
-          <!-- Проставлять класс asc или desc в зависимости от порядка сортировки -->
+          <!-- TODO: Проставлять класс asc или desc в зависимости от порядка сортировки -->
         </th>
       </tr>
     </thead>
     <tbody v-if="isLoading">
       <LoadingIcon />
+      <!-- TODO: сделать скелетон -->
     </tbody>
     <tbody v-else>
     <tr v-for="contact in rows" :key="contact.id.value">
